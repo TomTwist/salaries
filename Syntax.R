@@ -12,3 +12,6 @@ DF <- salaries %>%
 
 # Ausgabe der vorselektierten Variablen
 names(DF)
+
+# Statistiken inkl min und max von einzelnen Variblen
+favstats(~yrs.service, data = DF)
