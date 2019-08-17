@@ -15,10 +15,12 @@ names(DF)
 
 # Statistiken inkl min und max von einzelnen Variblen
 favstats(~yrs.service, data = DF)
-<<<<<<< HEAD
 favstats(~salary, data = DF)
 
-# summary liefert eine Übersicht über den Datensatz
-summary(DF)
-=======
->>>>>>> fb67daa580cab0d452005c1a8f0a835cb468a226
+# inspect liefert eine Übersicht über den Datensatz, mit $ über die einzelnen Variablen
+inspect(DF)
+inspect(DF$rank)
+inspect(DF$yrs.service)
+inspect(DF$sex)
+inspect(DF$salary)
+
