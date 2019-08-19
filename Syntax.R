@@ -66,6 +66,9 @@ qplot(DF$salary,
       fill=I("darkgoldenrod1"), 
       col=I("black"), 
       alpha=I(.5))
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bfae6bbd4f3a920d1cbe8538d9fc712d4131430d
 
