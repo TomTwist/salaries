@@ -89,3 +89,11 @@ qplot(data = DF,
 # Signifikanztest
 H1 <- lm(yrs.service ~ salary, data = DF)
 summary(H1)
+
+# Mittelwertvergleiche M und W im Gehalt
+DF_Fem <- filter(DF, sex =="Female")
+DF_Mal <- filter(DF, sex =="Male")
+mean(DF_Fem$salary)
+mean(DF_Mal$salary)
+mean(DF_Mal$salary) - mean(DF_Fem$salary)
+(mean(DF_Mal$salary) / mean(DF_Fem$salary))
