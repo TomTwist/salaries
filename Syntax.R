@@ -66,9 +66,26 @@ qplot(DF$salary,
       fill=I("darkgoldenrod1"), 
       col=I("black"), 
       alpha=I(.5))
-<<<<<<< HEAD
 
+# Korrelationen berechnen
+cor(yrs.service ~ salary, data = DF)
+cor(salary ~ yrs.service, data = DF)
 
-=======
->>>>>>> bfae6bbd4f3a920d1cbe8538d9fc712d4131430d
+cor(yrs.service ~ salary, data = filter(DF, rank == "Prof"))
+cor(yrs.service ~ salary, data = filter(DF, rank == "AssocProf"))
+cor(yrs.service ~ salary, data = filter(DF, rank == "AsstProf"))
+# Plpot zur Visualisierung des Zusammenhangs
+qplot(data = DF,
+  main = "Streudiagramm mit Trendgerade zu cor(yrs.service ~ salary, data = DF)",
+  x = yrs.service,
+  xlab = "Jahre im Dienst",
+  y = salary,
+  ylab = "Gehalt",
+  geom = "point") + 
+  geom_smooth(
+    method = "lm",
+    color ="firebrick1")
 
+# Signifikanztest
+H1 <- lm(yrs.service ~ salary, data = DF)
+summary(H1)
