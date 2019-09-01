@@ -24,9 +24,9 @@ favstats(~salary, data = DF)
 inspect(DF)
 
 inspect(DF$rank)
-DF_rank <- factor(DF$rank , levels=c("AsstProf", "AssocProf", "Prof"))
+DF$rank <- factor(DF$rank , levels=c("AsstProf", "AssocProf", "Prof"))
 tally(~rank, DF)
-qplot(DF_rank,
+qplot(DF$rank,
       main = "Histogramm für rank", 
       xlab = "Stellenbezeichung",  
       ylab = "Anzahl Befragte",
@@ -45,6 +45,7 @@ qplot(DF$yrs.service,
       col=I("black"), 
       alpha=I(.5))
 
+# bisher nicht berücksichtigt in Hausarbeit
 bwplot(DF$yrs.service,
        fill="lightblue")
 
@@ -67,9 +68,8 @@ qplot(DF$salary,
       col=I("black"), 
       alpha=I(.5))
 
-# Korrelationen berechnen
+# Korrelation berechnen
 cor(yrs.service ~ salary, data = DF)
-cor(salary ~ yrs.service, data = DF)
 
 cor(yrs.service ~ salary, data = filter(DF, rank == "Prof"))
 cor(yrs.service ~ salary, data = filter(DF, rank == "AssocProf"))
@@ -100,13 +100,39 @@ mean(DF_Mal$salary)
 mean(DF_Mal$salary) - mean(DF_Fem$salary)
 (mean(DF_Mal$salary) / mean(DF_Fem$salary))
 
-qplot(DF,
-      facets = ~sex,
-      main = "Histogramm für rank", 
-      xlab = "Stellenbezeichung",  
-      ylab = "Anzahl Befragte",
-      fill=I("darkgreen"), 
-      col=I("black"),
-      alpha=I(.5)) 
+qplot(x = sex, y = salary,
+      data = DF,
+      geom = "boxplot",
+      main = "Boxplot Gehalt und Geschlecht",
+      xlab = "Geschlecht",
+      ylab = "Gehalt",
+      alpha=I(.5),
+      colour=sex)
 
-qplot(x = rank, data = DF, geom = "bar", facets = sex~rank)
+#Sal_SD_Fem <- sd(DF_Fem$salary)
+#Sal_SD_Mal <- sd(DF_Mal$salary)
+#Sal_Mean_Fem <- mean(DF_Fem$salary)
+#Sal_Mean_Mal <- mean(DF_Mal$salary)
+mes(Sal_Mean_Fem, Sal_Mean_Mal, Sal_SD_Fem, Sal_SD_Mal, 39, 358)
+
+qplot(x = rank, y = salary,
+      data = DF,
+      main = "Boxplot Gehalt und Geschlecht nach Stellenbezeichnung",
+      xlab = "Stellenbezeichnung",
+      ylab = "Gehalt",
+      facets = ~sex,
+      geom = "boxplot",
+      alpha=I(.5),
+      colour=sex)
+
+mean(filter(DF_Fem, rank == "AsstProf")$salary)
+mean(filter(DF_Mal, rank == "AsstProf")$salary)
+mean(filter(DF_Mal, rank == "AsstProf")$salary) / mean(filter(DF_Fem, rank == "AsstProf")$salary)
+
+mean(filter(DF_Fem, rank == "AssocProf")$salary)
+mean(filter(DF_Mal, rank == "AssocProf")$salary)
+mean(filter(DF_Mal, rank == "AssocProf")$salary) / mean(filter(DF_Fem, rank == "AssocProf")$salary)
+
+mean(filter(DF_Fem, rank == "Prof")$salary)
+mean(filter(DF_Mal, rank == "Prof")$salary)
+mean(filter(DF_Mal, rank == "Prof")$salary) / mean(filter(DF_Fem, rank == "Prof")$salary)
